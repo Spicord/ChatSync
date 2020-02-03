@@ -1,0 +1,6 @@
+{
+    "id": "chatsync",
+    "name": "ChatSync",
+    "author": "Sheidy",
+    "main": "src/ChatSyncAddon.js"
+}

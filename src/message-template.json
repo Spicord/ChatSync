@@ -1,0 +1,10 @@
+{
+    "embed": {
+        "author": {
+            "name": "%player%",
+            "icon_url": "https://cravatar.eu/avatar/%player%"
+        },
+        "description": "%message%",
+        "color": 9166972
+    }
+}
