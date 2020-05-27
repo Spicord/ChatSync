@@ -18,8 +18,8 @@ const util      = require('./util')
 
 // constants
 const embed      = util.embed
-const configFile = path.join(__dirname, 'config.yml')
-const embedFile  = path.join(__dirname, 'message-template.json')
+const configFile = path.join(__data, 'config.yml')
+const embedFile  = path.join(__data, 'message-template.json')
 const addon      = new BaseAddon()
 
 // variables
@@ -31,7 +31,7 @@ var channel
 var embedStr
 
 // the chat listener
-listener(function(player, message) {
+listener(__engine, function(player, message) {
     if (channel == null)
         return
 
@@ -70,6 +70,7 @@ addon.on('command: setchannel', function(cmd, args) {
 
     if (channel) {
         channelId = channel.getIdLong()
+        console.log(config);
         config.set('channel-id', channelId)
         config.save()
         cmd.reply('Channel set to ' + channel.getAsMention())
