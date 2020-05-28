@@ -2,5 +2,6 @@
     "id": "chatsync",
     "name": "ChatSync",
     "author": "Sheidy",
+    "version": "1.0",
     "main": "src/ChatSyncAddon.js"
 }
