@@ -1,1 +1,15 @@
-channel-id: 588500623322775581
+# -- Values --
+# channel-id = how many cookies you want
+# 
+# type = can be 'embed' or 'message'
+# --
+# if you use 'message', then the
+# message below will be used,
+# --
+# if you use 'embed', then the
+# content of 'message-template.json'
+# will be used
+
+channel-id: '000000000000000000'
+type: 'message'
+message: '**[%player%]** %message%'

@@ -28,25 +28,36 @@ var jda
 var config
 var channelId
 var channel
+
+var messageType
+
 var embedStr
+var messageStr
 
 // the chat listener
 listener(__engine, function(player, message) {
     if (channel == null)
         return
 
-    message = embedStr.replace(/%player%/g, player).replace('%message%', message)
-    embed(message).sendToChannel(channel)
+    if (messageType == 'embed') {
+        message = embedStr.replace("%player%", player).replace('%message%', message)
+        embed(message).sendToChannel(channel)
+    } else {
+        message = messageStr.replace('%player%', player).replace('%message%', message)
+        channel.sendMessage(message).queue()
+    }
 })
 
 // set the variables when the bot is ready
 function ready(_bot) {
-    bot       = _bot
-    config    = yaml.load(configFile)
-    jda       = bot.getJda()
-    channelId = config.getLong('channel-id')
-    channel   = jda.getTextChannelById(channelId)
-    embedStr  = fs.readFileSync(embedFile, 'utf8')
+    bot         = _bot
+    jda         = bot.getJda()
+    config      = yaml.load(configFile)
+    channelId   = config.getString('channel-id')
+    messageType = config.getString('type')
+    messageStr  = config.getString('message')
+    channel     = jda.getTextChannelById(channelId)
+    embedStr    = fs.readFileSync(embedFile, 'utf8')
 }
 
 // ready handler
@@ -69,8 +80,7 @@ addon.on('command: setchannel', function(cmd, args) {
     }
 
     if (channel) {
-        channelId = channel.getIdLong()
-        console.log(config);
+        channelId = channel.getId()
         config.set('channel-id', channelId)
         config.save()
         cmd.reply('Channel set to ' + channel.getAsMention())
