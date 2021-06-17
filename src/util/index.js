@@ -1,5 +1,5 @@
-const Permission = require('class:net.dv8tion.jda.core.Permission')
-const Embed      = require('class:eu.mcdb.spicord.embed.Embed')
+const Permission = require('class:net.dv8tion.jda.api.Permission')
+const Embed      = require('class:org.spicord.embed.Embed')
 
 module.exports = {
     hasPermission: function(cmd, perm) {
