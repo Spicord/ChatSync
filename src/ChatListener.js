@@ -3,7 +3,7 @@ const path   = require('path')
 
 native.load(path.join(__dirname, 'lib', 'chatsync.jar'))
 
-const ChatListener = native.get('chatsync.ChatListener')
+const ChatListener = native.get('chatsync.EventListener')
 const listener     = new ChatListener()
 
 module.exports = function(engine, func) {
