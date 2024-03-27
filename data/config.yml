@@ -1,7 +1,7 @@
 # -- Values --
 # channel-id = how many cookies you want
 # 
-# type = can be 'embed' or 'message'
+# type = can be 'embed', 'message' or 'webhook'
 # --
 # if you use 'message', then the
 # message below will be used,
@@ -9,7 +9,15 @@
 # if you use 'embed', then the
 # content of 'message-template.json'
 # will be used
+# --
+# if you use 'webhook', then the
+# content of 'message-template.json'
+# will be used and you must also
+# set the value of 'webhook-url'
 
+# Placeholders: %player% -- %message% -- %server%
+
+webhook-url: ''
 channel-id: '000000000000000000'
 type: 'message'
 message: '**[%player%]** %message%'

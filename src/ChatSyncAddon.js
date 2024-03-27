@@ -29,6 +29,8 @@ var config
 var channelId
 var channel
 
+var webhookUrl
+
 var messageType
 
 var embedStr
@@ -43,10 +45,17 @@ listener(__engine, function(event) {
     var message = event.message()
     var server = event.server()
 
+    if (messageType == 'webhook') {
+        message = embedStr.replace("%player%", player).replace('%message%', message).replace('%server%', server)
+        embed(message).toWebhook().sendTo(webhookUrl)
+    }
+
     if (messageType == 'embed') {
         message = embedStr.replace("%player%", player).replace('%message%', message).replace('%server%', server)
         embed(message).sendToChannel(channel)
-    } else {
+    }
+
+    if (messageType == 'message') {
         message = messageStr.replace('%player%', player).replace('%message%', message).replace('%server%', server)
         channel.sendMessage(message).queue()
     }
@@ -60,6 +69,7 @@ function ready(_bot) {
     channelId   = config.getString('channel-id')
     messageType = config.getString('type')
     messageStr  = config.getString('message')
+    webhookUrl  = config.getString('webhook-url')
     channel     = jda.getTextChannelById(channelId)
     embedStr    = fs.readFileSync(embedFile, 'utf8')
 }
