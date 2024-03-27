@@ -1,2 +1,2 @@
 #!/bin/bash
-zip -r ChatSync.sp $(ls -1)
+zip -r ChatSync.sp data src addon.json
