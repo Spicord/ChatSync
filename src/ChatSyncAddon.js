@@ -35,15 +35,19 @@ var embedStr
 var messageStr
 
 // the chat listener
-listener(__engine, function(player, message) {
+listener(__engine, function(event) {
     if (channel == null)
         return
 
+    var player = event.player()
+    var message = event.message()
+    var server = event.server()
+
     if (messageType == 'embed') {
-        message = embedStr.replace("%player%", player).replace('%message%', message)
+        message = embedStr.replace("%player%", player).replace('%message%', message).replace('%server%', server)
         embed(message).sendToChannel(channel)
     } else {
-        message = messageStr.replace('%player%', player).replace('%message%', message)
+        message = messageStr.replace('%player%', player).replace('%message%', message).replace('%server%', server)
         channel.sendMessage(message).queue()
     }
 })
